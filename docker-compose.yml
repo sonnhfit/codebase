@@ -6,7 +6,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: tracking123
+      POSTGRES_PASSWORD: rootapp123
     volumes:
       - postgres_data:/var/lib/postgresql/data/
   redis:
@@ -17,14 +17,14 @@ services:
       - "6379:6379"
   worker:
     build: .
-    command: celery worker --app tracking --loglevel info --logfile celery-worker.log
+    command: celery worker --app rootapp --loglevel info --logfile celery-worker.log
     volumes:
       - .:/code
     depends_on:
       - redis
   schedule:
     build: .
-    command: celery beat --app tracking --loglevel info --logfile celery-beat.log
+    command: celery beat --app rootapp --loglevel info --logfile celery-beat.log
     volumes:
       - .:/code
     depends_on:
