@@ -38,13 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'apps.core',
     'apps.users',
+    'apps.videos',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -154,7 +157,68 @@ CACHES = {
     }
 }
 
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {name} {funcName} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {asctime} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'access_file': {
+            'class': 'logging.FileHandler',
+            'filename': os.getenv('DJANGO_ACCESS_LOG_FILE', 'access.log'),
+            'formatter': 'simple',
+        },
+        'info_file': {
+            'class': 'logging.FileHandler',
+            'filename': os.getenv('DJANGO_INFO_LOG_FILE', 'info.log'),
+            'formatter': 'verbose',
+        },
+        'error_file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.getenv('DJANGO_ERROR_LOG_FILE', 'error.log'),
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['access_file'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': True,
+        },
+        'apps': {
+            'handlers': ['info_file', 'error_file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
+
+
 # How long token is valid (seconds)
 EXPIRED_TOKEN_TIME = 86400
 EXPIRED_TOKEN_RESET_TIME = 360
 EXPIRED_TOKEN_CONFIRM_EMAIL_TIME = 86400
+
+
+# setup media folder
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+# Celery task queue configs
+
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_BACKEND_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'

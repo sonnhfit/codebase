@@ -18,8 +18,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class TokenSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    username = serializers.CharField()
+    email = serializers.CharField()
     access_token = serializers.CharField()
-    user = UserSerializer(read_only=True)
+    
 
 
 class LoginHistorySerializer(serializers.ModelSerializer):

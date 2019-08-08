@@ -22,14 +22,17 @@ class LoginAPIView(APIView):
         username = valid_data.get('username')
         password = valid_data.get('password')
         user = authenticate(username=username, password=password)
+
         if not user:
-            raise HTTP401AuthenticationError('Incorrect email or password')
+            raise HTTP401AuthenticationError('Incorrect email or password1')
 
         access_token = user_models.generate_access_token(user.id)
         token = user_models.Token.objects.create(user=user, key=access_token)
         data = {
+            'id': user.id,
+            'username': user.id,
+            'email': user.id,
             'access_token': token.key,
-            'user': user
         }
 
         user_utils.create_or_update_login_history(user.id)
@@ -44,3 +47,16 @@ class GetUserInfoAPIView(APIView):
         his = LoginHistory.objects.all()
         ser = user_sers.LoginHistorySerializer(his, many=True)
         return Response(ser.data, status=status.HTTP_200_OK)
+
+
+class LogoutAPI(APIView):
+
+    def post(self, request, format=None):
+        user_models.Token.objects.filter(key=request.auth.key).delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class GetAllUser(APIView):
+
+    def get(self, request, format=None):
+        pass
