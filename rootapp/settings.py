@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.users',
     'apps.videos',
+    'apps.faceid',
 ]
 
 MIDDLEWARE = [
