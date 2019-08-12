@@ -9,6 +9,7 @@ from django.core.files.storage import FileSystemStorage
 
 _logger = logging.getLogger(__name__)
 
+
 class FileUploadView(APIView):
 
     permission_classes = (permissions.AllowAny,)
@@ -19,7 +20,7 @@ class FileUploadView(APIView):
             user_id = request.data['user_id']
             print('user id la: ', user_id)
         except KeyError:
-            return Response({'file': ['no file']}, status=HTTP_400_BAD_REQUEST)
+            return Response({'file': ['no file']}, status=status.HTTP_400_BAD_REQUEST)
         try:
             fs = FileSystemStorage()
             filename = fs.save(str(user_id)+'/'+myfile.name, myfile)
