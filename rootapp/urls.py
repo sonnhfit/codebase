@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('apps.users.urls')),
     path('upload/', videos_views.FileUploadView.as_view()),
+    path('upload-base64/', videos_views.Base64FileUploadView.as_view()),
 ]
 
 if settings.DEBUG:
