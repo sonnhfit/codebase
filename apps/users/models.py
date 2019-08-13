@@ -23,7 +23,7 @@ def generate_access_token(user_id):
 
 class Token(models.Model):
     """
-    The default authorization token model.
+    The default authorization token model_data.
     """
     key = models.CharField(_("Key"), max_length=128, primary_key=True)
     user = models.ForeignKey(
