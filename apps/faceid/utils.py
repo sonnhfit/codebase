@@ -5,16 +5,17 @@ from tqdm import tqdm
 from sklearn.svm import SVC
 from sklearn.preprocessing import LabelEncoder
 from keras.models import load_model
+from django.conf import settings
 
 
 class Model:
     def __init__(self):
-        self.model = load_model('model_data/model.h5')
+        self.model = load_model('/code/apps/faceid/model_data/model.h5')
         self.le = None
         self.clf = None
         self.y = None
-        self.get_le('tmp')
-        self.train_classifier('tmp')
+        self.get_le(settings.MEDIA_ROOT + '/')
+        self.train_classifier(settings.MEDIA_ROOT + '/')
 
     def calculate_embeddings(self, file, mode='single', batch_size=32):
         """
