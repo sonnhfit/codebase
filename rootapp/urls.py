@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from apps.videos import views as videos_views
+from apps.faceid import views as face_views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,6 +26,8 @@ urlpatterns = [
     path('user/', include('apps.users.urls')),
     path('upload/', videos_views.FileUploadView.as_view()),
     path('upload-base64/', videos_views.Base64FileUploadView.as_view()),
+    path('train/', face_views.TrainingModel.as_view()),
+    path('predict/', face_views.PredictAPIView.as_view()),
 ]
 
 if settings.DEBUG:
