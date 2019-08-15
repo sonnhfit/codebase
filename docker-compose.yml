@@ -56,7 +56,6 @@ services:
       - web
     depends_on:
       - web
-      -
 volumes:
   postgres_data:
   redis_data:
