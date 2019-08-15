@@ -35,7 +35,10 @@ class PredictAPIView(APIView):
 
         ar = np.fromstring(file.read(), np.uint8)
         img = cv2.imdecode(ar, cv2.IMREAD_COLOR)
-        face = get_face(img, detect_fn)
+        try:
+            face = get_face(img, detect_fn)
+        except ValueError:
+            Response({'message': ["can't detect this face"]}, status=status.HTTP_400_BAD_REQUEST)
         with graph.as_default():
             res = model.classify(face)[0]
             data['success'] = True
@@ -44,6 +47,8 @@ class PredictAPIView(APIView):
 
 
 class TrainingModel(APIView):
+    permission_classes = (permissions.AllowAny,)
+
     def post(self, request, format=None):
         global model, graph
         with graph.as_default():

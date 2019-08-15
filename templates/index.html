@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+    <app-root>Loading the app...</app-root>
+    <script type="text/javascript" src="{% static 'faceid/runtime.js' %}"></script>
+    <script type="text/javascript" src="{% static 'faceid/es2015-polyfills' %}" nomodule></script>
+    <script type="text/javascript" src="{% static 'faceid/polyfills.js' %}"></script>
+    <script type="text/javascript" src="{% static 'faceid/styles.js' %}"></script>
+    <script type="text/javascript" src="{% static 'faceid/vendor.js' %}"></script>
+    <script type="text/javascript" src="{% static 'faceid/main.js' %}"></script>
+
+{% endblock %}

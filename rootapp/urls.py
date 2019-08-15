@@ -19,9 +19,11 @@ from apps.videos import views as videos_views
 from apps.faceid import views as face_views
 from django.conf import settings
 from django.conf.urls.static import static
+from apps.core import views as core_views
 
 
 urlpatterns = [
+    path('', core_views.IndexView.as_view()),
     path('admin/', admin.site.urls),
     path('user/', include('apps.users.urls')),
     path('upload/', videos_views.FileUploadView.as_view()),
