@@ -72,8 +72,7 @@ class Model:
     def train_classifier(self, basepath):
         if os.path.exists(basepath):
             embs = self.calculate_embeddings(basepath, mode='folder')
-            if not self.y.any():
-                self.y = self.get_le(basepath)[1]
+            self.y = self.get_le(basepath)[1]
             self.clf = SVC(kernel='linear', probability=True).fit(embs, self.y)
         return self.clf
 
