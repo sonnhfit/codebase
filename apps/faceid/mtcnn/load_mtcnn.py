@@ -51,8 +51,26 @@ class Detection:
             face.bounding_box[3] = np.minimum(bb[3] + self.face_crop_margin / 2, img_size[0])
             cropped = image[face.bounding_box[1]:face.bounding_box[3], face.bounding_box[0]:face.bounding_box[2], :]
             face.image = cv2.resize(cropped, (self.face_crop_size, self.face_crop_size))
+            print(face.image)
             # face.image = misc.imresize(cropped, (self.face_crop_size, self.face_crop_size), interp='bilinear')
-
             faces.append(face)
 
         return faces
+    def faces_crop(self, image):
+        bounding_boxes, _ = detect_face(image, self.minsize,
+                                        self.pnet, self.rnet, self.onet,
+                                        self.threshold, self.factor)
+        for bb in bounding_boxes:
+            face = Face()
+            face.container_image = image
+            face.bounding_box = np.zeros(4, dtype=np.int32)
+
+            img_size = np.asarray(image.shape)[0:2]
+            face.bounding_box[0] = np.maximum(bb[0] - self.face_crop_margin / 2, 0)
+            face.bounding_box[1] = np.maximum(bb[1] - self.face_crop_margin / 2, 0)
+            face.bounding_box[2] = np.minimum(bb[2] + self.face_crop_margin / 2, img_size[1])
+            face.bounding_box[3] = np.minimum(bb[3] + self.face_crop_margin / 2, img_size[0])
+            cropped = image[face.bounding_box[1]:face.bounding_box[3], face.bounding_box[0]:face.bounding_box[2], :]
+            face.image = cv2.resize(cropped, (self.face_crop_size, self.face_crop_size))
+
+        return face.image
