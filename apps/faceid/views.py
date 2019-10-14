@@ -15,6 +15,7 @@ from .mtcnn.load_mtcnn import Detection
 import tensorflow as tf
 from .utils import Model, get_face
 from django.conf import settings
+from apps.users.models import FileModelUser
 
 detect_fn = Detection().find_faces
 
@@ -43,6 +44,9 @@ class PredictAPIView(APIView):
             res = model.classify(face)[0]
             data['success'] = True
             data['name'] = res
+        fi = FileModelUser.objects.filter(key=data['name']).first()
+        data['file'] = fi.file_upload
+        data['file_name'] = settings.MEDIA_ROOT + '/'+fi.file_upload.name
         return Response(data, status=status.HTTP_200_OK)
 
 
@@ -52,5 +56,5 @@ class TrainingModel(APIView):
     def post(self, request, format=None):
         global model, graph
         with graph.as_default():
-            model.train_classifier(settings.MEDIA_ROOT + '/')
+            model.train_classifier(settings.MEDIA_ROOT + '/image_train/')
         return Response({'success': True}, status=status.HTTP_200_OK)

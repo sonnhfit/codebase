@@ -116,3 +116,8 @@ class UserNotification(models.Model):
     class Meta:
         db_table = 'user_notification'
         ordering = ['-created_at']
+
+
+class FileModelUser(models.Model):
+    key = models.CharField(max_length=128)
+    file_upload = models.FileField(upload_to='uploads/')

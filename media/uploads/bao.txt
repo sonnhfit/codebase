@@ -1,0 +1,37 @@
+Kịch bản người dùng sử dụng điện thoại di động để điểm danh sinh viên tại lớp trong đó đầu vào file ảnh chụp nhiều khuôn mặt khác nhau, đầu ra nhiều file excel liệt kê họ tên
+mã số sinh viên những người có mặt trong bức ảnh 
+
+
+detect tất cả khuôn mặt trong bức ảnh 
+phân lớp các khuôn mặt 
+
+restnet similariti 
+kiến trúc mạng CNN Restnet cắt fullyconnected layer ở trên cùng 
+thay bằng SVM (S)
+
+
+Thu thap du lieu 
+MTCNN detect face 
+    crop face, transform, tăng cường dữ liệu 
+
+trích chọn đặc trưng 
+    transfer learning (kiến trúc mạng, các thành phần của mạng )
+    REstnet được loại bỏ 2 layer cuối  (lý do sử dụng resnet)
+
+classification 
+    SVM (ngưỡng )
+    tripless lost
+
+
+
+
+so sánh 2 cái này 
+
+Ứng dụng trên nhiều thiêt bị, di động, 
+
+Thuật toán song song (thuật toán ), docker, microservice, 
+
+
+
+
+

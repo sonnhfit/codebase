@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Token, LoginHistory, Notification, UserNotification
+from .models import Token, LoginHistory, Notification, UserNotification, FileModelUser
 
 
 class TokenAdmin(admin.ModelAdmin):
@@ -23,3 +23,4 @@ admin.site.register(Token, TokenAdmin)
 admin.site.register(LoginHistory, LoginHistoryAdmin)
 admin.site.register(Notification, NotificationAdmin)
 admin.site.register(UserNotification, UserNotificationAdmin)
+admin.site.register(FileModelUser)

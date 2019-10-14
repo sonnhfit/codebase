@@ -65,7 +65,7 @@ class Base64FileUploadView(APIView):
             detect = Detection()
             faces = detect.faces_crop(np.array(image))
             os.remove(filename)
-            mydir = settings.MEDIA_ROOT + '/' + str(user_id) + '/'
+            mydir = settings.MEDIA_ROOT + '/image_train/' + str(user_id) + '/'
             name = mydir + str(user_id) + str(datetime.now()) + '.' + 'jpg'
             print(name)
             if os.path.exists(mydir):
