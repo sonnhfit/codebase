@@ -701,7 +701,7 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 var environment = {
-    apiUrl: 'http://54.254.158.114:8000',
+    apiUrl: 'http://0.0.0.0:8000',
     production: false
 };
 /*
@@ -749,7 +749,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/sonnh49local/Desktop/sonnguyen/codebase_frontend/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/nguyenson/Desktop/codebase_frontend/src/main.ts */"./src/main.ts");
 
 
 /***/ })
