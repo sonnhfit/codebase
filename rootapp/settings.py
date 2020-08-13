@@ -217,7 +217,7 @@ EXPIRED_TOKEN_CONFIRM_EMAIL_TIME = 86400
 
 # setup media folder
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media2')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ORIGIN_ALLOW_ALL = True
 
