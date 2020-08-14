@@ -58,62 +58,24 @@
           </div>
           <div class="row">
             <div class="col-4">
-                <div class="" style="padding: 15px; margin-top: 150px;">
-                    <div>
-                    <form method="POST" action="/" enctype='multipart/form-data'>
-                        {% csrf_token %} 
-                    <div class="form-group">
-                      <label for="exampleFormControlFile1">Chọn ảnh để hiển thị tất cả các file của user</label>
-                      <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                    <input class="btn btn-primary" type="submit" value="submit">
-                  </form>
-                  <input name="name_id" type="text" class="form-control-file" id="exampleFo" value="{{ id_name }}" >
-                  <a href="{% url 'uploa'  id_name %}">MÃ HÓA FILE</a>  
-                  <br>
-                </div>
-            
-                  <canvas id="canvas" width="400" height="300"></canvas>
-                  </div>
+                <canvas id="canvas" width="400" height="300"></canvas>
             </div>
             <div class="col-8">
-                <div class="" style="padding: 15px; margin-top: 150px;">
-                   
+              
                  
                     <div class="booth">
                         <video id="video" width="400" height="300"></video>
-                        <a href="#" id="capture" class="booth-capture-button">Chụp hình</a>
+                        <a href="#" id="capture" class="booth-capture-button">Giải mã</a>
                        
                     </div><!-- div.booth -->
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in list_file %}
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>{{ item.file_up }}</td>
-                        <td><a href="media/file_upload/{{ item.file_up.name }}">tải</a></td>
-                        <td>@mdo</td>
-                      </tr>
-                      {% endfor %}
-                     
-                    </tbody>
-                  </table>
-                </div>
+          
             </div>
           </div>
 
       </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   
@@ -159,13 +121,14 @@
                 // Gửi dữ liệu ảnh đến file saveimg.php thông qua phương thức POST
                 $.ajax({
                     type: "POST",
-                    url: "saveimg.php",
+                    url: "{% url 'giaima' id_fi %}",
                     data: {
                         imgBase64: data
                     }
                     // Sau khi gửi dữ liệu thành công thì sẽ thêm nút Đi tới link ảnh 
                 }).done(function (result) {
-                    $('.booth').append('<a href="' + result + '">Đi tới link ảnh</a>');
+                    // $('.booth').append('<a href="' + result + '">Tai file</a>');
+                    location.replace(result)
                 });
             });
         })();

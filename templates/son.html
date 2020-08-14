@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script> -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        * {padding: 0; margin: 0;}
+.booth {width: 400px; height: auto; margin: 20px auto; padding: 10px; background-color: #f1f1f1; border: 1px solid #e5e5e5;}
+.booth a {display: block; padding: 10px; text-align: center; background-color: #428bca; margin: 10px 0; font-size: 15px; color: #fff; text-decoration: none;}
+    </style>
+    <title>Hello, world!</title>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+      <div class="container">
+          <div class="row">
+            <h4>{{ mes }}</h4>
+          </div>
+          <div class="row">
+            <div class="col-4">
+                <div class="" style="padding: 15px; margin-top: 150px;">
+                    <div>
+                        <form method="POST" action="" enctype='multipart/form-data' >{% csrf_token %} 
+                          <div class="form-group">
+                              <label for="exampleFo">User</label>
+                              <input name="name_id" type="text" class="form-control-file" id="exampleFo" value="{{ id_name }}" >
+                            <label for="exampleFormControlFile1">Chọn file để mã hóa</label>
+                            <input name="file2" type="file" class="form-control-file" id="exampleFormControlFile2">
+                          </div>
+                          <input class="btn btn-primary" type="submit" value="Mã Hóa">
+                        </form>
+                      </div>
+            
+                  <canvas id="canvas" width="400" height="300"></canvas>
+                  </div>
+            </div>
+            <div class="col-8">
+                <div class="" style="padding: 15px; margin-top: 150px;">
+                   
+                 
+                    <div class="booth">
+                        <video id="video" width="400" height="300"></video>
+                        <a href="#" id="capture" class="booth-capture-button">Chụp hình</a>
+                       
+                    </div><!-- div.booth -->
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in list_file %}
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>{{ item.file_up}}</td>
+                        <td><a href="media/file_upload/{{ item.file_up }}">tải</a></td>
+                        <td>giải mã</td>
+                      </tr>
+                      {% endfor %}
+                     
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+
+      </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+    <script type="text/javascript">
+
+        (function () 
+        {
+            // BƯỚC 1: KHỞI TẠO CÁC BIẾN
+            var video = document.getElementById('video');
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var vendoUrl = window.URL || window.webkitURL;
+         
+            // BƯỚC 2: XỬ LÝ HIỂN THỊ WEBCAM BAN ĐẦU
+            canvas.style.display = 'none'; // Ẩn thẻ canvas khi vừa tải trang
+         
+            // Biến chưa hình ảnh webcam tuỳ theo loại từng trình duyệt
+            navigator.getMedia = navigator.getUserMedia ||
+                    navigator.webkitGetUserMedia ||
+                    navigator.mozGetUserMedia ||
+                    navigator.msGetUserMedia;
+         
+            // Hàm lấy hình ảnh webcam
+            navigator.getMedia({
+                video: true, // Có hình ảnh
+                audio: false // Không có âm thanh
+                        // Hàm chèn đường dẫn webcam vào thẻ video
+            }, function (stream) {
+                video.srcObject = stream
+                video.play(); // Phát thẻ video
+                // Hàm thông báo khi xảy lỗi hoặc không hỗ trợ trên trình duyệt này
+            }, function (error) {
+                alert('Rất tiếc đã xảy ra lỗi, có thể do trình duyệt của bạn không hỗ trợ chức năng này hoặc trang này chưa kết nối riêng tư https.');
+            });
+         
+            // XỬ LÝ SỰ KIỆN CLICK VÀO NÚT CHỤP ẢNH
+            document.getElementById('capture').addEventListener('click', function () 
+            {
+                canvas.style.display = 'block'; // Hiện thẻ canas
+                // In hình ảnh lên thẻ canvas ở x = 0, y = 0, width = 400, height = 300
+                context.drawImage(video, 0, 0, 400, 300);
+                data = canvas.toDataURL(); // Tạo một đường dẫn hình ảnh của canvas
+                // Gửi dữ liệu ảnh đến file saveimg.php thông qua phương thức POST
+                $.ajax({
+                    type: "POST",
+                    url: "saveimg.php",
+                    data: {
+                        imgBase64: data
+                    }
+                    // Sau khi gửi dữ liệu thành công thì sẽ thêm nút Đi tới link ảnh 
+                }).done(function (result) {
+                    $('.booth').append('<a href="' + result + '">Đi tới link ảnh</a>');
+                });
+            });
+        })();
+        
+            </script>
+</body>
+</html>
+

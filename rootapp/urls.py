@@ -23,13 +23,10 @@ from apps.core import views as core_views
 
 
 urlpatterns = [
-    path('', core_views.IndexView.as_view()),
+    path('', face_views.IndexViewHome.as_view()),
+    path('uplo/<id_name>/', face_views.MaHoaFile.as_view(), name="uploa"),
+    path('giaima/<id_file>/', face_views.GiaiMaView.as_view(), name="giaima"),
     path('admin/', admin.site.urls),
-    path('user/', include('apps.users.urls')),
-    path('upload/', videos_views.FileUploadView.as_view()),
-    path('upload-base64/', videos_views.Base64FileUploadView.as_view()),
-    path('train/', face_views.TrainingModel.as_view()),
-    path('predict/', face_views.PredictAPIView.as_view()),
 ]
 
 if settings.DEBUG:

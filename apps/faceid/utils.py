@@ -14,8 +14,8 @@ class Model:
         self.le = None
         self.clf = None
         self.y = None
-        self.get_le(settings.MEDIA_ROOT + '/')
-        self.train_classifier(settings.MEDIA_ROOT + '/')
+        self.get_le(settings.MEDIA_ROOT + '/img/')
+        self.train_classifier(settings.MEDIA_ROOT + '/img/')
 
     def calculate_embeddings(self, file, mode='single', batch_size=32):
         """
