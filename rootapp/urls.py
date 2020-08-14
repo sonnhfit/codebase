@@ -25,6 +25,7 @@ from apps.core import views as core_views
 urlpatterns = [
     path('', face_views.IndexViewHome.as_view()),
     path('uplo/<id_name>/', face_views.MaHoaFile.as_view(), name="uploa"),
+    path('giaima/<id_file>/', face_views.GiaiMaView.as_view(), name="giaima"),
     path('admin/', admin.site.urls),
 ]
 

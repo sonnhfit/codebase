@@ -96,8 +96,8 @@
                         {% for item in list_file %}
                       <tr>
                         <th scope="row">1</th>
-                        <td>{{ item.file_up.path }}</td>
-                        <td><a href="{{ item.file_up.filename }}">tải</a></td>
+                        <td>{{ item.file_up}}</td>
+                        <td><a href="media/file_upload/{{ item.file_up }}">tải</a></td>
                         <td>giải mã</td>
                       </tr>
                       {% endfor %}
