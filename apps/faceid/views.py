@@ -237,6 +237,10 @@ class GiaiMaView(View):
                     mystr = f.read()
                     resu = decode1(res, mystr)
                     f.close()
+                    
+                    f2 = open(txt_name, "w")
+                    f2.write(resu)
+                    f2.close()
 
                     print(resu)
                     return HttpResponse('/media/file_upload/'+file_giaima.file_up.name)
